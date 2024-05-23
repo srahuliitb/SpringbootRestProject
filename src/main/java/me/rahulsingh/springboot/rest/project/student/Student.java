@@ -81,7 +81,7 @@ public class Student {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Student student)) return false;
-        return Objects.equals(id, student.id) && Objects.equals(name, student.name) && Objects.equals(email, student.email) && Objects.equals(dob, student.dob) && Objects.equals(age, student.age);
+        return Objects.equals(name, student.name) && Objects.equals(email, student.email) && Objects.equals(dob, student.dob) && Objects.equals(age, student.age);
     }
 
     @Override
