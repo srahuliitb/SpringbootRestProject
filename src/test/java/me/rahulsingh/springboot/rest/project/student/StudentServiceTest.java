@@ -61,7 +61,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenEmailExists() {
+    void addNewStudentShouldThrowExceptionWhenEmailExists() {
         // given
         String email = "Doe.John@rahulsingh.me";
         LocalDate dob = LocalDate.of(1990, Month.MAY, 23);
@@ -79,7 +79,28 @@ class StudentServiceTest {
     }
 
     @Test
-    @Disabled
-    void deleteStudent() {
+    void shouldDeleteStudentWhenIdExists() {
+        // given
+        Long studentId = 1L;
+        given(studentRepository.existsById(studentId)).willReturn(true);
+        // when
+        underTest.deleteStudent(studentId);
+        // then
+        verify(studentRepository).deleteById(studentId);
+    }
+
+    @Test
+    void deleteStudentShouldThrowExceptionStudentWhenIdExists() {
+        // given
+        Long studentId = 1L;
+        given(studentRepository.existsById(studentId)).willReturn(false);
+        // when
+
+        // then
+        assertThatThrownBy(() -> underTest.deleteStudent(studentId))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage((String.format("Student with id %s does not exists", studentId)));
+
+        verify(studentRepository, never()).deleteById(any());
     }
 }
