@@ -1,5 +1,6 @@
 package me.rahulsingh.springboot.rest.project.student;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,13 @@ public class StudentService {
     }
 
     public void addNewStudent(Student student) {
-        Optional<Student> studentBeingSearched = studentRepository.findStudentByEmail(student.getEmail());
-        if (studentBeingSearched.isPresent()) {
-            throw new IllegalStateException("Email already exists!");
+//        Optional<Student> studentBeingSearched = studentRepository.findStudentByEmail(student.getEmail());
+//        if (studentBeingSearched.isPresent()) {
+//            throw new IllegalStateException("Email already exists!");
+//        }
+        Boolean emailExists = studentRepository.selectExistsEmail(student.getEmail());
+        if (emailExists) {
+            throw new IllegalStateException(String.format("Student with email %s already exists!", student.getEmail()));
         }
         studentRepository.save(student);
     }

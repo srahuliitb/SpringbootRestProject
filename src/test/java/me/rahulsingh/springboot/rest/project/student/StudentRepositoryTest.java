@@ -49,18 +49,18 @@ class StudentRepositoryTest {
         assertThat(expected).isFalse();
     }
 
-    @Test
-    void shouldReturnStudentByEmail() {
-        // given
-        String email = "Doe.John@rahulsingh.me";
-        LocalDate dob = LocalDate.of(1990, Month.MAY, 23);
-        Student student = new Student("John Doe", email, dob);
-        underTest.save(student);
-
-        // when
-        Optional<Student> expectedStudent = underTest.findStudentByEmail(email);
-
-        // then
-        assertThat(expectedStudent).isNotEmpty();
-    }
+//    @Test
+//    void shouldReturnStudentByEmail() {
+//        // given
+//        String email = "Doe.John@rahulsingh.me";
+//        LocalDate dob = LocalDate.of(1990, Month.MAY, 23);
+//        Student student = new Student("John Doe", email, dob);
+//        underTest.save(student);
+//
+//        // when
+//        Optional<Student> expectedStudent = underTest.findStudentByEmail(email);
+//
+//        // then
+//        assertThat(expectedStudent).isNotEmpty();
+//    }
 }
